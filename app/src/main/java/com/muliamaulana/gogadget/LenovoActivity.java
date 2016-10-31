@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SamsungActivity extends AppCompatActivity {
+public class LenovoActivity extends AppCompatActivity {
 
     ArrayList<Phone> phoneList;
     PhoneAdapter phoneAdapter;
@@ -36,14 +36,15 @@ public class SamsungActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_samsung);
-        setTitle("Samsung");
+        setContentView(R.layout.activity_lenovo);
+        setTitle("Lenovo");
+
 
         phoneList = new ArrayList<Phone>();
-        new JSONAsyncTask().execute("http://ibacor.com/api/gsm-arena?view=brand&slug=samsung&page=1");
+        new LenovoActivity.JSONAsyncTask().execute("http://ibacor.com/api/gsm-arena?view=brand&slug=lenovo&page=1");
 
         ListView listview = (ListView) findViewById(R.id.myListView);
-        phoneAdapter = new PhoneAdapter(SamsungActivity.this, R.layout.list_item_hp, phoneList);
+        phoneAdapter = new PhoneAdapter(LenovoActivity.this, R.layout.list_item_hp, phoneList);
 
         listview.setAdapter(phoneAdapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,16 +55,14 @@ public class SamsungActivity extends AppCompatActivity {
                 String urlImg = String.valueOf(phoneList.get(position).getImage());
                 Log.d("Kode Slug ", kodeslug);
 
-                Intent detailPhone = new Intent(SamsungActivity.this, DetailPhone.class);
+                Intent detailPhone = new Intent(LenovoActivity.this, DetailPhone.class);
                 detailPhone.putExtra("slug", kodeslug);
                 detailPhone.putExtra("title", namaHP);
                 detailPhone.putExtra("img", urlImg);
                 startActivity(detailPhone);
             }
         });
-
     }
-
 
     class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
@@ -73,7 +72,7 @@ public class SamsungActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(SamsungActivity.this);
+            dialog = new ProgressDialog(LenovoActivity.this);
             dialog.setMessage("Please wait...");
 //            dialog.setTitle("Connecting server");
             dialog.show();
@@ -128,10 +127,8 @@ public class SamsungActivity extends AppCompatActivity {
             dialog.cancel();
             phoneAdapter.notifyDataSetChanged();
             if (result == false)
-            Toast.makeText(SamsungActivity.this, "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+                Toast.makeText(LenovoActivity.this, "Unable to fetch data from server", Toast.LENGTH_LONG).show();
 
         }
     }
-
-
 }

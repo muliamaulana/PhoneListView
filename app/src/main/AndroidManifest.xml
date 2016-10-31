@@ -10,14 +10,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SamsungActivity">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".DetailPhone" android:parentActivityName=".SamsungActivity" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SamsungActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".AppleActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SonyActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".LenovoActivity" android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".DetailPhone"
+            android:parentActivityName=".SamsungActivity" />
     </application>
 
 </manifest>
